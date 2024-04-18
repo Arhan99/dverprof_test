@@ -10,8 +10,13 @@ const Header = () => {
   const { currentUser, setCurrentUser } = userStore;
   const router = useRouter();
 
-  const currentUserString = localStorage.getItem("currentUser");
-  const currentUserLS = JSON.parse(currentUserString);
+  let currentUserString;
+  let currentUserLS;
+
+  if (typeof window !== "undefined") {
+    currentUserString = localStorage.getItem("currentUser");
+    currentUserLS = JSON.parse(currentUserString);
+  }
 
   useEffect(() => {
     setCurrentUser(currentUserLS);
