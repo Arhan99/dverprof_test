@@ -11,7 +11,7 @@ const Header = () => {
   const router = useRouter();
 
   const currentUserString = localStorage.getItem("currentUser");
-  const currentUserLS = JSON.parse(currentUserString);
+  const currentUserLS = JSON.parse(currentUserString ?? "");
 
   useEffect(() => {
     setCurrentUser(currentUserLS);
@@ -32,13 +32,11 @@ const Header = () => {
 
   return (
     <header className="w-full bg-gray-200 p-4 sticky top-0 z-100">
-      <div>
-        <h2>
-          {currentUser?.type
-            ? `${currentUser.type} | ${currentUser.name}`
-            : "Login"}
-        </h2>
-      </div>
+      <h2>
+        {currentUser?.type
+          ? `${currentUser.type} | ${currentUser.name}`
+          : "Login"}
+      </h2>
       {currentUser?.type && (
         <h2 className="cursor-pointer" onClick={handleLogout}>
           Log out

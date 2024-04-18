@@ -58,47 +58,53 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
-            <tr key={index} className="bg-gray-100">
-              <td className="border px-4 py-2 text-center">{item.id}</td>
-              <td className="border px-4 py-2 text-center">
-                <input
-                  type="text"
-                  value={item.amount}
-                  onChange={(e) => handleChange(e, index, "amount")}
-                  className="border px-2 py-1 w-full"
-                />
-              </td>
-              <td className="border px-4 py-2 text-center">
-                <input
-                  type="text"
-                  value={item.product}
-                  onChange={(e) => handleChange(e, index, "product")}
-                  className="border px-2 py-1 w-full"
-                />
-              </td>
-              <td className="border px-4 py-2 text-center">
-                {item.status === "Completed" ? (
-                  "Оплачено"
-                ) : (
-                  <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                    onClick={() => handlePayClick("url")}
-                  >
-                    Оплатить
-                  </button>
-                )}
-              </td>
-              <td className="border px-4 py-2 text-center">
-                <input
-                  type="text"
-                  value={item.date}
-                  onChange={(e) => handleChange(e, index, "date")}
-                  className="border px-2 py-1 w-full"
-                />
-              </td>
-            </tr>
-          ))}
+          {data.map((item, index) => {
+            const isDisabled = item.status === "Completed";
+            return (
+              <tr key={index} className="bg-gray-100">
+                <td className="border px-4 py-2 text-center">{item.id}</td>
+                <td className="border px-4 py-2 text-center">
+                  <input
+                    type="text"
+                    value={item.amount}
+                    onChange={(e) => handleChange(e, index, "amount")}
+                    className="border px-2 py-1 w-full"
+                    disabled={isDisabled}
+                  />
+                </td>
+                <td className="border px-4 py-2 text-center">
+                  <input
+                    type="text"
+                    value={item.product}
+                    onChange={(e) => handleChange(e, index, "product")}
+                    className="border px-2 py-1 w-full"
+                    disabled={isDisabled}
+                  />
+                </td>
+                <td className="border px-4 py-2 text-center">
+                  {item.status === "Completed" ? (
+                    "Оплачено"
+                  ) : (
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                      onClick={() => handlePayClick("url")}
+                    >
+                      Оплатить
+                    </button>
+                  )}
+                </td>
+                <td className="border px-4 py-2 text-center">
+                  <input
+                    type="date"
+                    value={item.date}
+                    onChange={(e) => handleChange(e, index, "date")}
+                    className="border px-2 py-1 w-full"
+                    disabled={isDisabled}
+                  />
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
